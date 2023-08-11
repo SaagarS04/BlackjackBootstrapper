@@ -49,5 +49,5 @@ def recommendation(p, d):
     returnVals = ['hit', 'double', 'stand']
     return returnVals[turns.index(max(turns))], turns
 playerCount = int(input("What is the total count of the player?")) #Takes user input
-dealerCount = int(input("What is the dealer show card value?))
+dealerCount = int(input("What is the dealer show card value?"))
 recommendation(playerCount, dealerCount)
