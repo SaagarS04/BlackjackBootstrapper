@@ -15,20 +15,20 @@ def hitTurn(p):
     else:
         return p
 def recommendation(p, d):
-    hit = 0 #Keep track of wins/losses when hitting
-    double = 0 #Keep track of wins/losses when doubling
-    stand = 0 #Keep track of wins/losses when standing
-    n = 1000000 #Number of simulations to be run
+    hit = 0
+    double = 0
+    stand = 0
+    n = 1000000
     for i in range(n):
-        standTurn = p #Stores standing value
-        hitAndDouble = hitTurn(p) #Stores hit and double value
-        dealer = dealerTurn(d) #Runs through a dealer turn, standing on a 17
-        if (hitAndDouble == 1000): #Checks if hit/double busted
-            hit -= 1 #Adds a loss to the counters
+        standTurn = p
+        hitAndDouble = hitTurn(p)
+        dealer = dealerTurn(d)
+        if (hitAndDouble == 1000):
+            hit -= 1
             double -= 2
         else:
-            if (dealer == 1000): #Checks if dealer busted
-                hit += 1 #Adds a win to the counters
+            if (dealer == 1000):
+                hit += 1
                 double += 2
             else:
                 if (dealer > hitAndDouble):
@@ -37,17 +37,18 @@ def recommendation(p, d):
                 else:
                     hit += 1
                     double += 2
-        if (dealer == 1000): #Checks if dealer busted
-            stand += 1 #Adds a win to the counter
+        if (dealer == 1000):
+            stand += 1
         else:
-            if (dealer > standTurn): #Compares standing value to dealer value
-                stand -= 1 #Adds a loss
+            if (dealer > standTurn):
+                stand -= 1
             else:
-                stand += 1 #Adds a win
+                stand += 1
                 
     turns = [hit, double, stand]
     returnVals = ['hit', 'double', 'stand']
-    return returnVals[turns.index(max(turns))], turns
-playerCount = int(input("What is the total count of the player?")) #Takes user input
-dealerCount = int(input("What is the dealer show card value?"))
-recommendation(playerCount, dealerCount)
+    returnString = 'Player Reccomendation: ' + returnVals[turns.index(max(turns))] + '. Values of [hit, double, stand]: ' + str(turns)
+    return returnString
+playerCount = int(input("What is the total count of the player? ")) #Takes user input
+dealerCount = int(input("What is the dealer show card value? "))
+print(recommendation(playerCount, dealerCount))
